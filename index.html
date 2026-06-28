@@ -43,3 +43,211 @@
 
 </body>
 </html>
+
+const password=document.getElementById("password");
+
+const strengthBar=document.getElementById("strengthBar");
+
+const strengthText=document.getElementById("strengthText");
+
+const showBtn=document.getElementById("showBtn");
+
+password.addEventListener("input",checkPassword);
+
+showBtn.addEventListener("click",()=>{
+
+if(password.type==="password"){
+
+password.type="text";
+
+showBtn.innerHTML="Hide";
+
+}
+
+else{
+
+password.type="password";
+
+showBtn.innerHTML="Show";
+
+}
+
+});
+
+function checkPassword(){
+
+let pass=password.value;
+
+let score=0;
+
+let upper=/[A-Z]/;
+
+let lower=/[a-z]/;
+
+let number=/[0-9]/;
+
+let special=/[^A-Za-z0-9]/;
+
+document.getElementById("length").className=pass.length>=8?"valid":"invalid";
+
+document.getElementById("length").innerHTML=(pass.length>=8?"✔ ":"❌ ")+"Minimum 8 Characters";
+
+if(pass.length>=8) score++;
+
+document.getElementById("upper").className=upper.test(pass)?"valid":"invalid";
+
+document.getElementById("upper").innerHTML=(upper.test(pass)?"✔ ":"❌ ")+"Uppercase Letter";
+
+if(upper.test(pass)) score++;
+
+document.getElementById("lower").className=lower.test(pass)?"valid":"invalid";
+
+document.getElementById("lower").innerHTML=(lower.test(pass)?"✔ ":"❌ ")+"Lowercase Letter";
+
+if(lower.test(pass)) score++;
+
+document.getElementById("number").className=number.test(pass)?"valid":"invalid";
+
+document.getElementById("number").innerHTML=(number.test(pass)?"✔ ":"❌ ")+"Number";
+
+if(number.test(pass)) score++;
+
+document.getElementById("special").className=special.test(pass)?"valid":"invalid";
+
+document.getElementById("special").innerHTML=(special.test(pass)?"✔ ":"❌ ")+"Special Character";
+
+if(special.test(pass)) score++;
+
+if(score<=2){
+
+strengthBar.style.width="33%";
+
+strengthBar.style.background="red";
+
+strengthText.innerHTML="Strength : Weak";
+
+}
+
+else if(score<=4){
+
+strengthBar.style.width="66%";
+
+strengthBar.style.background="orange";
+
+strengthText.innerHTML="Strength : Medium";
+
+}
+
+else{
+
+strengthBar.style.width="100%";
+
+strengthBar.style.background="green";
+
+strengthText.innerHTML="Strength : Strong";
+
+}
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#1e272e;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+
+background:white;
+padding:30px;
+border-radius:10px;
+width:400px;
+box-shadow:0px 0px 20px rgba(0,0,0,.3);
+
+}
+
+h1{
+
+text-align:center;
+margin-bottom:20px;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+font-size:18px;
+margin-bottom:10px;
+
+}
+
+button{
+
+width:100%;
+padding:10px;
+background:#0984e3;
+color:white;
+border:none;
+cursor:pointer;
+font-size:16px;
+margin-bottom:20px;
+
+}
+
+.progress{
+
+width:100%;
+height:10px;
+background:#ddd;
+border-radius:10px;
+
+}
+
+#strengthBar{
+
+height:10px;
+width:0%;
+border-radius:10px;
+transition:.5s;
+
+}
+
+h2{
+
+margin-top:20px;
+
+}
+
+.rules{
+
+margin-top:20px;
+
+}
+
+.rules p{
+
+margin:8px 0;
+
+}
+
+.valid{
+
+color:green;
+
+}
+
+.invalid{
+
+color:red;
+
+}
